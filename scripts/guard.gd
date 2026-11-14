@@ -13,10 +13,19 @@ var direction: float = 1.0
 var disabled: bool = false
 var anim_phase: float = 0.0
 
+@onready var anim_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
+
 func _ready() -> void:
 	add_to_group("rewindable")
 	add_to_group("guards")
 	origin_x = position.x
+	if anim_sprite:
+		if is_boss:
+			if ResourceLoader.exists("res://assets/sprites/boss/boss_frames.tres"):
+				anim_sprite.sprite_frames = load("res://assets/sprites/boss/boss_frames.tres")
+				anim_sprite.position = Vector2(0, -64)
+		else:
+			anim_sprite.position = Vector2(0, -48)
 	if not texture:
 		var tex_path := "res://assets/characters/boss.png" if is_boss else "res://assets/characters/guard.png"
 		if ResourceLoader.exists(tex_path):
@@ -27,6 +36,7 @@ func _ready() -> void:
 			disabled_texture = load(dis_path)
 
 func _physics_process(delta: float) -> void:
+	_update_animation()
 	if RewindManager.is_rewinding:
 		queue_redraw()
 		return
@@ -66,6 +76,7 @@ func knock_out() -> void:
 	if not disabled:
 		disabled = true
 		velocity = Vector2.ZERO
+		_update_animation()
 		queue_redraw()
 
 func capture_rewind_state() -> Dictionary:
@@ -83,9 +94,42 @@ func restore_rewind_state(state: Dictionary) -> void:
 	direction = state.direction
 	disabled = state.disabled
 	anim_phase = state.anim_phase
+	_update_animation()
 	queue_redraw()
 
+func _update_animation() -> void:
+	if not anim_sprite or not anim_sprite.sprite_frames:
+		return
+
+	anim_sprite.flip_h = (direction < 0.0)
+
+	if disabled:
+		if anim_sprite.sprite_frames.has_animation("defeat"):
+			if anim_sprite.animation != "defeat":
+				anim_sprite.play("defeat")
+		return
+
+	if is_boss:
+		if anim_sprite.sprite_frames.has_animation("attack"):
+			if anim_sprite.animation != "attack":
+				anim_sprite.play("attack")
+		elif anim_sprite.sprite_frames.has_animation("idle"):
+			if anim_sprite.animation != "idle":
+				anim_sprite.play("idle")
+	else:
+		if abs(velocity.x) > 10.0:
+			if anim_sprite.sprite_frames.has_animation("walk"):
+				if anim_sprite.animation != "walk":
+					anim_sprite.play("walk")
+		else:
+			if anim_sprite.sprite_frames.has_animation("idle"):
+				if anim_sprite.animation != "idle":
+					anim_sprite.play("idle")
+
 func _draw() -> void:
+	if anim_sprite and anim_sprite.visible and anim_sprite.sprite_frames:
+		return
+
 	var active_tex: Texture2D = disabled_texture if disabled and disabled_texture else texture
 	if active_tex:
 		var flip_scale := Vector2(direction if not disabled else 1.0, 1.0)

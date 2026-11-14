@@ -1,0 +1,162 @@
+{
+  "ball/idle": {
+    "labeled": 16,
+    "extracted": 15
+  },
+  "ball/run": {
+    "labeled": 24,
+    "extracted": 19
+  },
+  "ball/jump": {
+    "labeled": 16,
+    "extracted": 15
+  },
+  "ball/fall": {
+    "labeled": 12,
+    "extracted": 15
+  },
+  "ball/land": {
+    "labeled": 16,
+    "extracted": 15
+  },
+  "ball/bounce": {
+    "labeled": 20,
+    "extracted": 15
+  },
+  "ball/wall_jump": {
+    "labeled": 12,
+    "extracted": 12
+  },
+  "ball/hit": {
+    "labeled": 12,
+    "extracted": 13
+  },
+  "ball/death": {
+    "labeled": 16,
+    "extracted": 14
+  },
+  "rewind/effect": {
+    "labeled": 24,
+    "extracted": 21
+  },
+  "rewind/aura": {
+    "labeled": 16,
+    "extracted": 18
+  },
+  "rewind/restore": {
+    "labeled": 12,
+    "extracted": 12
+  },
+  "guard/idle": {
+    "labeled": 8,
+    "extracted": 2
+  },
+  "guard/walk": {
+    "labeled": 16,
+    "extracted": 9
+  },
+  "guard/alert": {
+    "labeled": 8,
+    "extracted": 3
+  },
+  "guard/aim": {
+    "labeled": 8,
+    "extracted": 3
+  },
+  "guard/shoot": {
+    "labeled": 10,
+    "extracted": 4
+  },
+  "guard/hit": {
+    "labeled": 8,
+    "extracted": 2
+  },
+  "guard/defeat": {
+    "labeled": 12,
+    "extracted": 6
+  },
+  "boss/idle": {
+    "labeled": 8,
+    "extracted": 4
+  },
+  "boss/attack": {
+    "labeled": 16,
+    "extracted": 7
+  },
+  "boss/hit": {
+    "labeled": 10,
+    "extracted": 4
+  },
+  "boss/defeat": {
+    "labeled": 12,
+    "extracted": 8
+  },
+  "vfx/bounce_impact": {
+    "labeled": 12,
+    "extracted": 5
+  },
+  "vfx/dash_trail": {
+    "labeled": 16,
+    "extracted": 5
+  },
+  "vfx/ground_dash": {
+    "labeled": 16,
+    "extracted": 4
+  },
+  "vfx/spark": {
+    "labeled": 8,
+    "extracted": 4
+  },
+  "vfx/explosion": {
+    "labeled": 16,
+    "extracted": 3
+  },
+  "vfx/collect_spark": {
+    "labeled": 12,
+    "extracted": 4
+  },
+  "vfx/portal": {
+    "labeled": 12,
+    "extracted": 5
+  },
+  "vfx/stage_transition": {
+    "labeled": 16,
+    "extracted": 10
+  },
+  "props/evidence": {
+    "labeled": 8,
+    "extracted": 5
+  },
+  "props/checkpoint": {
+    "labeled": 8,
+    "extracted": 4
+  },
+  "props/crate": {
+    "labeled": 3,
+    "extracted": 4
+  },
+  "hazards/spikes": {
+    "labeled": 4,
+    "extracted": 4
+  },
+  "hazards/electric_arc": {
+    "labeled": 16,
+    "extracted": 5
+  },
+  "hazards/power_node": {
+    "labeled": 8,
+    "extracted": 4
+  },
+  "tiles": {
+    "labeled": 10,
+    "extracted": 10
+  },
+  "ui": {
+    "labeled": 9,
+    "extracted": 9
+  },
+  "story": {
+    "labeled": 3,
+    "extracted": 3
+  }
+}

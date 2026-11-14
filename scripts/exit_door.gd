@@ -8,8 +8,11 @@ var locked: bool = true
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	if not texture and ResourceLoader.exists("res://assets/props/portal.png"):
-		texture = load("res://assets/props/portal.png")
+	if not texture:
+		if ResourceLoader.exists("res://assets/sprites/vfx/portal/00.png"):
+			texture = load("res://assets/sprites/vfx/portal/00.png")
+		elif ResourceLoader.exists("res://assets/props/portal.png"):
+			texture = load("res://assets/props/portal.png")
 
 func _physics_process(_delta: float) -> void:
 	queue_redraw()

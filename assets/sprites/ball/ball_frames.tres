@@ -1,0 +1,734 @@
+[gd_resource type="SpriteFrames" load_steps=134 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/00.png" id="Ext_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/01.png" id="Ext_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/02.png" id="Ext_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/03.png" id="Ext_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/04.png" id="Ext_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/05.png" id="Ext_6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/06.png" id="Ext_7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/07.png" id="Ext_8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/08.png" id="Ext_9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/09.png" id="Ext_10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/10.png" id="Ext_11"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/11.png" id="Ext_12"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/12.png" id="Ext_13"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/13.png" id="Ext_14"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/14.png" id="Ext_15"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/00.png" id="Ext_16"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/01.png" id="Ext_17"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/02.png" id="Ext_18"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/03.png" id="Ext_19"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/04.png" id="Ext_20"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/05.png" id="Ext_21"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/06.png" id="Ext_22"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/07.png" id="Ext_23"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/08.png" id="Ext_24"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/09.png" id="Ext_25"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/10.png" id="Ext_26"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/11.png" id="Ext_27"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/12.png" id="Ext_28"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/13.png" id="Ext_29"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/14.png" id="Ext_30"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/15.png" id="Ext_31"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/16.png" id="Ext_32"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/17.png" id="Ext_33"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/run/18.png" id="Ext_34"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/00.png" id="Ext_35"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/01.png" id="Ext_36"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/02.png" id="Ext_37"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/03.png" id="Ext_38"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/04.png" id="Ext_39"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/05.png" id="Ext_40"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/06.png" id="Ext_41"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/07.png" id="Ext_42"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/08.png" id="Ext_43"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/09.png" id="Ext_44"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/10.png" id="Ext_45"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/11.png" id="Ext_46"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/12.png" id="Ext_47"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/13.png" id="Ext_48"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/jump/14.png" id="Ext_49"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/00.png" id="Ext_50"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/01.png" id="Ext_51"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/02.png" id="Ext_52"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/03.png" id="Ext_53"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/04.png" id="Ext_54"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/05.png" id="Ext_55"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/06.png" id="Ext_56"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/07.png" id="Ext_57"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/08.png" id="Ext_58"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/09.png" id="Ext_59"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/10.png" id="Ext_60"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/11.png" id="Ext_61"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/12.png" id="Ext_62"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/13.png" id="Ext_63"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/14.png" id="Ext_64"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/00.png" id="Ext_65"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/01.png" id="Ext_66"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/02.png" id="Ext_67"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/03.png" id="Ext_68"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/04.png" id="Ext_69"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/05.png" id="Ext_70"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/06.png" id="Ext_71"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/07.png" id="Ext_72"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/08.png" id="Ext_73"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/09.png" id="Ext_74"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/10.png" id="Ext_75"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/11.png" id="Ext_76"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/12.png" id="Ext_77"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/13.png" id="Ext_78"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/14.png" id="Ext_79"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/00.png" id="Ext_80"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/01.png" id="Ext_81"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/02.png" id="Ext_82"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/03.png" id="Ext_83"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/04.png" id="Ext_84"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/05.png" id="Ext_85"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/06.png" id="Ext_86"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/07.png" id="Ext_87"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/08.png" id="Ext_88"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/09.png" id="Ext_89"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/10.png" id="Ext_90"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/11.png" id="Ext_91"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/12.png" id="Ext_92"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/13.png" id="Ext_93"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/14.png" id="Ext_94"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/00.png" id="Ext_95"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/01.png" id="Ext_96"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/02.png" id="Ext_97"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/03.png" id="Ext_98"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/04.png" id="Ext_99"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/05.png" id="Ext_100"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/06.png" id="Ext_101"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/07.png" id="Ext_102"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/08.png" id="Ext_103"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/09.png" id="Ext_104"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/10.png" id="Ext_105"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/11.png" id="Ext_106"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/00.png" id="Ext_107"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/01.png" id="Ext_108"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/02.png" id="Ext_109"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/03.png" id="Ext_110"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/04.png" id="Ext_111"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/05.png" id="Ext_112"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/06.png" id="Ext_113"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/07.png" id="Ext_114"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/08.png" id="Ext_115"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/09.png" id="Ext_116"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/10.png" id="Ext_117"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/11.png" id="Ext_118"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/12.png" id="Ext_119"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/00.png" id="Ext_120"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/01.png" id="Ext_121"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/02.png" id="Ext_122"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/03.png" id="Ext_123"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/04.png" id="Ext_124"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/05.png" id="Ext_125"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/06.png" id="Ext_126"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/07.png" id="Ext_127"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/08.png" id="Ext_128"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/09.png" id="Ext_129"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/10.png" id="Ext_130"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/11.png" id="Ext_131"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/12.png" id="Ext_132"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/13.png" id="Ext_133"]
+
+[resource]
+animations = [
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_1")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_2")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_3")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_4")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_5")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_6")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_7")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_8")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_9")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_10")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_11")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_12")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_13")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_14")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_15")
+}
+],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_16")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_17")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_18")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_19")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_20")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_21")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_22")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_23")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_24")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_25")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_26")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_27")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_28")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_29")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_30")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_31")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_32")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_33")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_34")
+}
+],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_35")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_36")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_37")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_38")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_39")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_40")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_41")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_42")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_43")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_44")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_45")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_46")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_47")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_48")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_49")
+}
+],
+"loop": false,
+"name": &"jump",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_50")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_51")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_52")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_53")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_54")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_55")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_56")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_57")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_58")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_59")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_60")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_61")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_62")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_63")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_64")
+}
+],
+"loop": false,
+"name": &"fall",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_65")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_66")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_67")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_68")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_69")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_70")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_71")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_72")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_73")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_74")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_75")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_76")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_77")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_78")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_79")
+}
+],
+"loop": false,
+"name": &"land",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_80")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_81")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_82")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_83")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_84")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_85")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_86")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_87")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_88")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_89")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_90")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_91")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_92")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_93")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_94")
+}
+],
+"loop": true,
+"name": &"bounce",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_95")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_96")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_97")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_98")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_99")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_100")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_101")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_102")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_103")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_104")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_105")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_106")
+}
+],
+"loop": false,
+"name": &"wall_jump",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_107")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_108")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_109")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_110")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_111")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_112")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_113")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_114")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_115")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_116")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_117")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_118")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_119")
+}
+],
+"loop": false,
+"name": &"hit",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_120")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_121")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_122")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_123")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_124")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_125")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_126")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_127")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_128")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_129")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_130")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_131")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_132")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_133")
+}
+],
+"loop": false,
+"name": &"death",
+"speed": 12.0
+}
+]

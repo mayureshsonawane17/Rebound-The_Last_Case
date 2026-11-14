@@ -1,135 +1,142 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene format=3 uid="uid://bi3v8xda0pn88"]
 
-[ext_resource type="Script" path="res://scripts/levels/headquarters.gd" id="1"]
+[ext_resource type="Script" uid="uid://vijatjgkr2w6" path="res://scripts/levels/headquarters.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/evidence.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/exit_door.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/guard.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/trap.tscn" id="6"]
-
 [ext_resource type="PackedScene" path="res://scenes/world/platform.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://scenes/world/background.tscn" id="11"]
 [ext_resource type="PackedScene" path="res://scenes/world/trap_release.tscn" id="13"]
 
-[sub_resource type="RectangleShape2D" id="Shape_Ground"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf6yh"]
 resource_local_to_scene = true
 size = Vector2(1280, 80)
 
-[sub_resource type="RectangleShape2D" id="Shape_EntranceLedge"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r7s6"]
 resource_local_to_scene = true
 size = Vector2(180, 24)
 
-[sub_resource type="RectangleShape2D" id="Shape_ReleaseCatwalk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nabar"]
 resource_local_to_scene = true
 size = Vector2(240, 24)
 
-[sub_resource type="RectangleShape2D" id="Shape_EvidencePedestal"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2kqc"]
 resource_local_to_scene = true
 size = Vector2(180, 24)
 
-[sub_resource type="RectangleShape2D" id="Shape_LeftWall"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp6y6"]
 resource_local_to_scene = true
 size = Vector2(20, 720)
 
-[sub_resource type="RectangleShape2D" id="Shape_RightWall"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yry0j"]
 resource_local_to_scene = true
 size = Vector2(20, 720)
 
-[node name="Headquarters" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxkay"]
+resource_local_to_scene = true
+size = Vector2(40, 8)
+
+[node name="Headquarters" type="Node2D" unique_id=1954883950]
 script = ExtResource("1")
 level_index = 5
 stage_title = "STAGE 5: DRUG LORD'S HEADQUARTERS"
 level_hint = "The crime boss guards the vault. Drop the chandelier trap on him and secure the final evidence!"
 evidence_id = "evidence_5"
 
-[node name="Player" parent="." instance=ExtResource("2")]
+[node name="Player" parent="." unique_id=286621137 instance=ExtResource("2")]
 position = Vector2(90, 580)
 
-[node name="BossGuard" parent="." instance=ExtResource("5")]
+[node name="BossGuard" parent="." unique_id=849424611 instance=ExtResource("5")]
 position = Vector2(520, 620)
 patrol_distance = 120.0
 speed = 85.0
 is_boss = true
 
-[node name="BossCrateTrap" parent="." instance=ExtResource("6")]
+[node name="BossCrateTrap" parent="." unique_id=879671550 instance=ExtResource("6")]
 position = Vector2(650, 160)
-trap_type = 0
 
-[node name="VaultElectricTrap" parent="." instance=ExtResource("6")]
+[node name="VaultElectricTrap" parent="." unique_id=1374198410 instance=ExtResource("6")]
 position = Vector2(800, 600)
 trap_type = 1
 cycle_time = 2.4
 
-[node name="Evidence" parent="." instance=ExtResource("3")]
+[node name="Evidence" parent="." unique_id=1913053272 instance=ExtResource("3")]
 position = Vector2(950, 430)
 evidence_id = "evidence_5"
 
-[node name="ExitDoor" parent="." instance=ExtResource("4")]
+[node name="ExitDoor" parent="." unique_id=885283756 instance=ExtResource("4")]
 position = Vector2(1190, 620)
 
-[node name="Background" parent="." instance=ExtResource("11")]
+[node name="Background" parent="." unique_id=877820833 instance=ExtResource("11")]
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." unique_id=1335063364]
 process_mode = 1
 
-[node name="Ground" parent="World" instance=ExtResource("10")]
+[node name="Ground" parent="World" unique_id=498049803 instance=ExtResource("10")]
 position = Vector2(640, 660)
 
 [node name="Collider" parent="World/Ground" index="0"]
-shape = SubResource("Shape_Ground")
+shape = SubResource("RectangleShape2D_gf6yh")
 one_way_collision = false
 
-[node name="EntranceLedge" parent="World" instance=ExtResource("10")]
+[node name="EntranceLedge" parent="World" unique_id=2015787986 instance=ExtResource("10")]
 position = Vector2(160, 500)
 
 [node name="Collider" parent="World/EntranceLedge" index="0"]
-shape = SubResource("Shape_EntranceLedge")
-one_way_collision = true
+shape = SubResource("RectangleShape2D_0r7s6")
 
-[node name="ReleaseCatwalk" parent="World" instance=ExtResource("10")]
+[node name="ReleaseCatwalk" parent="World" unique_id=96558369 instance=ExtResource("10")]
 position = Vector2(480, 360)
 
 [node name="Collider" parent="World/ReleaseCatwalk" index="0"]
-shape = SubResource("Shape_ReleaseCatwalk")
-one_way_collision = true
+shape = SubResource("RectangleShape2D_nabar")
+one_way_collision = false
 
-[node name="EvidencePedestal" parent="World" instance=ExtResource("10")]
+[node name="EvidencePedestal" parent="World" unique_id=1664210556 instance=ExtResource("10")]
 position = Vector2(950, 480)
 
 [node name="Collider" parent="World/EvidencePedestal" index="0"]
-shape = SubResource("Shape_EvidencePedestal")
-one_way_collision = true
+shape = SubResource("RectangleShape2D_k2kqc")
 
-[node name="LeftWall" parent="World" instance=ExtResource("10")]
+[node name="LeftWall" parent="World" unique_id=907518619 instance=ExtResource("10")]
 position = Vector2(10, 360)
 
 [node name="Collider" parent="World/LeftWall" index="0"]
-shape = SubResource("Shape_LeftWall")
+shape = SubResource("RectangleShape2D_fp6y6")
 one_way_collision = false
 
-[node name="RightWall" parent="World" instance=ExtResource("10")]
+[node name="RightWall" parent="World" unique_id=936554323 instance=ExtResource("10")]
 position = Vector2(1270, 360)
 
 [node name="Collider" parent="World/RightWall" index="0"]
-shape = SubResource("Shape_RightWall")
+shape = SubResource("RectangleShape2D_yry0j")
 one_way_collision = false
 
-[node name="TrapRelease" parent="World" instance=ExtResource("13")]
+[node name="TrapRelease" parent="World" unique_id=1222921696 instance=ExtResource("13")]
 position = Vector2(480, 320)
 trap_path = NodePath("../../BossCrateTrap")
+
+[node name="Collider" parent="World/TrapRelease" index="0"]
+position = Vector2(1, 23)
+shape = SubResource("RectangleShape2D_bxkay")
+
+[node name="Marker" parent="World/TrapRelease" index="1"]
+position = Vector2(1, 23)
+
+[node name="Label" parent="World/TrapRelease" index="2"]
+offset_left = -25.0
+offset_top = -6.0
+offset_right = 24.0
+offset_bottom = 11.0
 
 [connection signal="activated" from="World/TrapRelease" to="." method="_on_trap_released"]
 
 [editable path="World/Ground"]
-
 [editable path="World/EntranceLedge"]
-
 [editable path="World/ReleaseCatwalk"]
-
 [editable path="World/EvidencePedestal"]
-
 [editable path="World/LeftWall"]
-
 [editable path="World/RightWall"]
-
 [editable path="World/TrapRelease"]

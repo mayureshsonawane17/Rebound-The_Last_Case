@@ -1,115 +1,113 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene format=3 uid="uid://pywbic351g0b"]
 
-[ext_resource type="Script" path="res://scripts/levels/apartment.gd" id="1"]
+[ext_resource type="Script" uid="uid://vpb65ln3vast" path="res://scripts/levels/apartment.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/evidence.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/exit_door.tscn" id="4"]
-
 [ext_resource type="PackedScene" path="res://scenes/world/platform.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://scenes/world/background.tscn" id="11"]
 [ext_resource type="PackedScene" path="res://scenes/world/moving_platform.tscn" id="12"]
 
-[sub_resource type="RectangleShape2D" id="Shape_StartFloor"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2omd"]
 resource_local_to_scene = true
 size = Vector2(400, 80)
 
-[sub_resource type="RectangleShape2D" id="Shape_MidLedge"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddulo"]
 resource_local_to_scene = true
 size = Vector2(160, 24)
 
-[sub_resource type="RectangleShape2D" id="Shape_ExitFloor"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3oett"]
 resource_local_to_scene = true
 size = Vector2(480, 80)
 
-[sub_resource type="RectangleShape2D" id="Shape_EvidenceLedge"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xo3ul"]
 resource_local_to_scene = true
 size = Vector2(220, 24)
 
-[sub_resource type="RectangleShape2D" id="Shape_LeftWall"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ia74s"]
 resource_local_to_scene = true
 size = Vector2(30, 720)
 
-[sub_resource type="RectangleShape2D" id="Shape_RightWall"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2to3"]
 resource_local_to_scene = true
 size = Vector2(30, 720)
 
-[node name="Apartment" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4s2p"]
+resource_local_to_scene = true
+size = Vector2(140, 24)
+
+[node name="Apartment" type="Node2D" unique_id=1778649012]
 script = ExtResource("1")
-level_index = 1
-stage_title = "STAGE 1: DETECTIVE'S APARTMENT"
 level_hint = "A/D to move • Space to jump • Cross the gap on the amber platform • Hold R if you fall"
-evidence_id = "evidence_1"
 
-[node name="Player" parent="." instance=ExtResource("2")]
+[node name="Player" parent="." unique_id=8915842 instance=ExtResource("2")]
 position = Vector2(120, 540)
 
-[node name="Evidence" parent="." instance=ExtResource("3")]
+[node name="Evidence" parent="." unique_id=1657003491 instance=ExtResource("3")]
 position = Vector2(950, 430)
-evidence_id = "evidence_1"
 
-[node name="ExitDoor" parent="." instance=ExtResource("4")]
+[node name="ExitDoor" parent="." unique_id=1470238359 instance=ExtResource("4")]
 position = Vector2(1180, 580)
 
-[node name="Background" parent="." instance=ExtResource("11")]
+[node name="Background" parent="." unique_id=766449833 instance=ExtResource("11")]
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." unique_id=556938287]
 process_mode = 1
 
-[node name="StartFloor" parent="World" instance=ExtResource("10")]
+[node name="StartFloor" parent="World" unique_id=1965972127 instance=ExtResource("10")]
 position = Vector2(200, 620)
 
 [node name="Collider" parent="World/StartFloor" index="0"]
-shape = SubResource("Shape_StartFloor")
+shape = SubResource("RectangleShape2D_t2omd")
 one_way_collision = false
 
-[node name="MidLedge" parent="World" instance=ExtResource("10")]
+[node name="MidLedge" parent="World" unique_id=1334245871 instance=ExtResource("10")]
 position = Vector2(350, 500)
 
 [node name="Collider" parent="World/MidLedge" index="0"]
-shape = SubResource("Shape_MidLedge")
-one_way_collision = true
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_ddulo")
 
-[node name="ExitFloor" parent="World" instance=ExtResource("10")]
+[node name="ExitFloor" parent="World" unique_id=1772725402 instance=ExtResource("10")]
 position = Vector2(1040, 620)
 
 [node name="Collider" parent="World/ExitFloor" index="0"]
-shape = SubResource("Shape_ExitFloor")
+shape = SubResource("RectangleShape2D_3oett")
 one_way_collision = false
 
-[node name="EvidenceLedge" parent="World" instance=ExtResource("10")]
+[node name="EvidenceLedge" parent="World" unique_id=151054685 instance=ExtResource("10")]
 position = Vector2(950, 480)
 
 [node name="Collider" parent="World/EvidenceLedge" index="0"]
-shape = SubResource("Shape_EvidenceLedge")
-one_way_collision = true
+shape = SubResource("RectangleShape2D_xo3ul")
 
-[node name="LeftWall" parent="World" instance=ExtResource("10")]
+[node name="LeftWall" parent="World" unique_id=385830819 instance=ExtResource("10")]
 position = Vector2(0, 360)
 
 [node name="Collider" parent="World/LeftWall" index="0"]
-shape = SubResource("Shape_LeftWall")
+shape = SubResource("RectangleShape2D_ia74s")
 one_way_collision = false
 
-[node name="RightWall" parent="World" instance=ExtResource("10")]
+[node name="RightWall" parent="World" unique_id=1903807238 instance=ExtResource("10")]
 position = Vector2(1280, 360)
 
 [node name="Collider" parent="World/RightWall" index="0"]
-shape = SubResource("Shape_RightWall")
+shape = SubResource("RectangleShape2D_v2to3")
 one_way_collision = false
 
-[node name="MovingPlatform" parent="World" instance=ExtResource("12")]
+[node name="MovingPlatform" parent="World" unique_id=29785995 instance=ExtResource("12")]
 position = Vector2(620, 480)
 
+[node name="Collider" parent="World/MovingPlatform" index="0"]
+shape = SubResource("RectangleShape2D_c4s2p")
+
+[node name="Visual" parent="World/MovingPlatform" index="1"]
+position = Vector2(-1, 3)
+
 [editable path="World/StartFloor"]
-
 [editable path="World/MidLedge"]
-
 [editable path="World/ExitFloor"]
-
 [editable path="World/EvidenceLedge"]
-
 [editable path="World/LeftWall"]
-
 [editable path="World/RightWall"]
-
 [editable path="World/MovingPlatform"]

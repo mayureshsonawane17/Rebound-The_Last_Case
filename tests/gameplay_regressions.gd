@@ -60,7 +60,7 @@ func run() -> void:
 	await ticks(5)
 	var electric = current_scene.get_node("ElectricTrap1")
 	var victim = current_scene.get_node("Player")
-	electric.time_elapsed = 0
+	electric.time_elapsed = 0.6 # After the new half-second charging warning.
 	victim.position = electric.position + Vector2(0, -47)
 	await ticks(3)
 	check(victim.dead, "Active electrical hazard kills on physical overlap")

@@ -18,6 +18,13 @@ func travel(target: Vector2, jump: bool) -> bool:
 	var player = level.get_node("Player")
 	Input.action_release("jump")
 	await physics_frame
+	if gm.current_level == 5 and target.x == 700:
+		# The crate now honors its warning delay; wait for its descent before
+		# crossing the marked drop shaft, just as a player would.
+		for wait_tick in range(180):
+			if level.get_node("BossCrateTrap").landed:
+				break
+			await physics_frame
 	if gm.current_level == 1 and target.x == 900:
 		for wait_tick in range(300):
 			steer(player, level.platform.position.x + 20)

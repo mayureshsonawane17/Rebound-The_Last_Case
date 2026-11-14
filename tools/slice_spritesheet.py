@@ -2,17 +2,19 @@
 """
 tools/slice_spritesheet.py
 BounceFlux Re-runnable Sprite Sheet Slicer for Godot 4.x
-Extracts all animations from art/source/spritesheet_overview.png,
-removes near-white background to transparent RGBA with unmultiplied edges,
-normalizes frames into uniform cells with consistent bottom-center pivots,
-and exports numbered PNG sequences to assets/sprites/<group>/<animation>/.
-Also generates Godot 4.x SpriteFrames .tres resources.
+Extracts all animations from art/source/spritesheet_overview.png:
+- Glow/VFX sprites (ball, rewind, VFX, portal, evidence, power node, arc):
+  uses Color to Alpha against white with un-premultiplied RGB.
+- Solid sprites (guard, boss, crate, spikes, tiles, flag):
+  uses border flood-fill with edge defringing.
+- Strict frame isolation via valley bounds & connected components (no neighbor slivers).
+- Normalizes into uniform cells with consistent bottom-center / center pivots.
+- Generates Godot 4.x SpriteFrames .tres resources.
 """
 
 import os
 import sys
 import json
-import glob
 from collections import deque
 from PIL import Image
 import numpy as np
@@ -20,55 +22,75 @@ import numpy as np
 SOURCE_PATH = "art/source/spritesheet_overview.png"
 OUTPUT_BASE = "assets/sprites"
 
-def remove_white_bg(sub_arr, bg_thresh=18, soft_range=32.0):
+def color_to_alpha_white(rgb_arr, white_cutoff=246, min_alpha=0.035):
     """
-    Remove near-white background using exterior flood-fill and edge un-multiplication.
-    sub_arr: uint8 (H, W, 3) RGB.
-    Returns: uint8 (H, W, 4) RGBA.
+    Color-to-alpha against white for glowing sprites.
+    alpha = 1 - min(r,g,b)/255, then un-premultiply color:
+    c = (c - 255*(1-alpha)) / alpha
     """
-    h, w, _ = sub_arr.shape
-    dist = 255.0 - np.min(sub_arr, axis=2)
-    near_white = dist < bg_thresh
+    rgb = rgb_arr.astype(np.float32)
+    min_v = np.min(rgb, axis=2)
+    alpha = np.where(min_v >= white_cutoff, 0.0, 1.0 - (min_v / 255.0))
+    alpha = np.where(alpha < min_alpha, 0.0, alpha)
+    
+    safe_a = np.maximum(alpha, 1e-5)
+    unmult = np.zeros_like(rgb)
+    for c in range(3):
+        unmult[:, :, c] = (rgb[:, :, c] - 255.0 * (1.0 - alpha)) / safe_a
+    unmult = np.clip(unmult, 0, 255).astype(np.uint8)
+    a_byte = np.clip(alpha * 255.0, 0, 255).astype(np.uint8)
+    return np.dstack([unmult, a_byte])
 
+def flood_fill_solid(rgb_arr, bg_thresh=225):
+    """
+    Flood-fill background from image borders for solid sprites, then defringe edge pixels.
+    """
+    h, w, _ = rgb_arr.shape
+    min_v = np.min(rgb_arr, axis=2)
+    is_bg_candidate = min_v > bg_thresh
+    
     exterior = np.zeros((h, w), dtype=bool)
     queue = deque()
     for x in range(w):
-        if near_white[0, x]: queue.append((0, x)); exterior[0, x] = True
-        if near_white[h-1, x]: queue.append((h-1, x)); exterior[h-1, x] = True
+        if is_bg_candidate[0, x]: queue.append((0, x)); exterior[0, x] = True
+        if is_bg_candidate[h-1, x]: queue.append((h-1, x)); exterior[h-1, x] = True
     for y in range(h):
-        if near_white[y, 0]: queue.append((y, 0)); exterior[y, 0] = True
-        if near_white[y, w-1]: queue.append((y, w-1)); exterior[y, w-1] = True
-
+        if is_bg_candidate[y, 0]: queue.append((y, 0)); exterior[y, 0] = True
+        if is_bg_candidate[y, w-1]: queue.append((y, w-1)); exterior[y, w-1] = True
+        
     while queue:
         cy, cx = queue.popleft()
-        for dy, dx in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+        for dy, dx in [(-1,0),(1,0),(0,-1),(0,1)]:
             ny, nx = cy + dy, cx + dx
             if 0 <= ny < h and 0 <= nx < w:
-                if not exterior[ny, nx] and near_white[ny, nx]:
+                if not exterior[ny, nx] and is_bg_candidate[ny, nx]:
                     exterior[ny, nx] = True
                     queue.append((ny, nx))
-
+                    
     fg = ~exterior
-    alpha = np.zeros((h, w), dtype=np.float32)
-    alpha[fg] = 1.0
-
-    for y in range(h):
-        for x in range(w):
-            if exterior[y, x]:
-                d = dist[y, x]
-                if d > 3.0:
-                    alpha[y, x] = min(1.0, (d - 3.0) / soft_range)
-
-    rgba = np.zeros((h, w, 4), dtype=np.uint8)
-    safe_a = np.maximum(alpha, 1e-4)
-    for c in range(3):
-        unmult = (sub_arr[:, :, c].astype(np.float32) - 255.0 * (1.0 - alpha)) / safe_a
-        rgba[:, :, c] = np.clip(unmult, 0, 255).astype(np.uint8)
-    rgba[:, :, 3] = (alpha * 255.0).astype(np.uint8)
+    # Defringe edge pixels:
+    touch_ext = np.zeros((h, w), dtype=bool)
+    touch_ext[1:, :] |= exterior[:-1, :]
+    touch_ext[:-1, :] |= exterior[1:, :]
+    touch_ext[:, 1:] |= exterior[:, :-1]
+    touch_ext[:, :-1] |= exterior[:, 1:]
+    
+    alpha = np.where(fg, 255, 0).astype(np.uint8)
+    # If edge pixel is very light (residual white border), erase it
+    edge_near_white = fg & touch_ext & (min_v > 180)
+    alpha[edge_near_white] = 0
+    
+    # Soft defringe for intermediate edge pixels
+    soft_edge = fg & touch_ext & (min_v > 120) & ~edge_near_white
+    if np.any(soft_edge):
+        edge_a = (1.0 - (min_v[soft_edge].astype(np.float32) - 120.0) / 135.0)
+        alpha[soft_edge] = np.clip(edge_a * 255.0, 0, 255).astype(np.uint8)
+        
+    rgba = np.dstack([rgb_arr, alpha])
     return rgba
 
-def trim_rgba(rgba, pad=1, alpha_thresh=15):
-    """Trim empty transparent borders."""
+def trim_rgba(rgba, pad=1, alpha_thresh=10):
+    """Trim transparent borders."""
     mask = rgba[:, :, 3] > alpha_thresh
     if not np.any(mask):
         return rgba
@@ -84,9 +106,6 @@ def trim_rgba(rgba, pad=1, alpha_thresh=15):
 def place_in_cell(sprite_rgba, cell_size=(64, 64), pivot="bottom_center", ground_offset=4):
     """
     Places trimmed sprite_rgba inside a cell_size canvas.
-    pivot:
-      'bottom_center': grounded horizontally at center, bottom at cell_h - ground_offset
-      'center': centered horizontally and vertically
     """
     cw, ch = cell_size
     sh, sw, _ = sprite_rgba.shape
@@ -113,58 +132,74 @@ def place_in_cell(sprite_rgba, cell_size=(64, 64), pivot="bottom_center", ground
     cell[oy:oy+sh, ox:ox+sw] = sprite_rgba
     return Image.fromarray(cell)
 
-def slice_by_peaks(sub_arr, min_dist=14, thresh=30, dark_core=False, pad_x=2):
+def slice_strip_isolated(sub_rgb, is_glow=True, min_dist=14, dark_core=False, cell_size=(64, 64), pivot="bottom_center", ground_offset=4):
     """
-    Slice horizontal strip by finding column peaks of content.
+    Converts strip to RGBA (glow or solid), finds peaks and valley boundaries,
+    and isolates each frame strictly within its valley bounds to prevent any neighbor bleed.
     """
-    h, w, _ = sub_arr.shape
-    if dark_core:
-        core = (sub_arr[:, :, 0] < 90) & (sub_arr[:, :, 2] > 70)
-        signal = np.sum(core, axis=0)
+    h, w, _ = sub_rgb.shape
+    if is_glow:
+        rgba = color_to_alpha_white(sub_rgb)
     else:
-        dist = 255.0 - np.min(sub_arr, axis=2)
-        signal = np.sum(dist > thresh, axis=0)
+        rgba = flood_fill_solid(sub_rgb)
+        
+    alpha_norm = rgba[:, :, 3].astype(np.float32) / 255.0
+    if dark_core:
+        # Detect character silhouettes
+        core = (sub_rgb[:, :, 0] < 90) & (sub_rgb[:, :, 2] > 70)
+        signal = np.sum(core, axis=0).astype(np.float32)
+    else:
+        signal = np.sum(alpha_norm, axis=0)
 
     smoothed = np.convolve(signal, np.ones(3)/3.0, mode='same')
     peaks = []
     for x in range(1, len(smoothed)-1):
-        if smoothed[x] >= 3 and smoothed[x] >= smoothed[x-1] and smoothed[x] >= smoothed[x+1]:
+        if smoothed[x] >= 2.0 and smoothed[x] >= smoothed[x-1] and smoothed[x] >= smoothed[x+1]:
             if not peaks or x - peaks[-1] >= min_dist:
                 peaks.append(x)
 
-    crops = []
     if not peaks:
-        crops.append(sub_arr)
-        return crops
+        trimmed = trim_rgba(rgba)
+        if trimmed.shape[0] >= 2 and trimmed.shape[1] >= 2:
+            return [place_in_cell(trimmed, cell_size=cell_size, pivot=pivot, ground_offset=ground_offset)]
+        return []
 
-    # Boundaries are midpoints between peaks
-    bounds = [0]
+    # Find the minimum-energy valley between consecutive peaks
+    valleys = [0]
     for i in range(len(peaks) - 1):
-        mid = (peaks[i] + peaks[i+1]) // 2
-        bounds.append(mid)
-    bounds.append(w)
+        p1 = peaks[i]
+        p2 = peaks[i+1]
+        v = p1 + int(np.argmin(smoothed[p1:p2+1]))
+        valleys.append(v)
+    valleys.append(w)
 
+    cells = []
     for i in range(len(peaks)):
-        x0 = max(0, bounds[i])
-        x1 = min(w, bounds[i+1])
-        slice_crop = sub_arr[:, x0:x1]
-        dist_slice = 255.0 - np.min(slice_crop, axis=2)
-        nz = np.where(np.max(dist_slice, axis=0) > 15)[0]
-        if len(nz) > 0:
-            cx0 = max(0, x0 + nz[0] - pad_x)
-            cx1 = min(w, x0 + nz[-1] + 1 + pad_x)
-            crops.append(sub_arr[:, cx0:cx1])
-        else:
-            crops.append(slice_crop)
-    return crops
+        x0 = valleys[i]
+        x1 = valleys[i+1]
+        
+        # Strictly zero out any pixels outside this frame's valley
+        frame_rgba = np.zeros_like(rgba)
+        frame_rgba[:, x0:x1] = rgba[:, x0:x1]
+        
+        trimmed = trim_rgba(frame_rgba, pad=1, alpha_thresh=12)
+        if trimmed.shape[0] < 2 or trimmed.shape[1] < 2:
+            continue
+            
+        cell_img = place_in_cell(trimmed, cell_size=cell_size, pivot=pivot, ground_offset=ground_offset)
+        cells.append(cell_img)
+        
+    return cells
 
-def slice_by_connectivity(sub_arr, min_w=6, thresh=25, pad_x=2):
-    """
-    Slice horizontal strip by finding non-empty column intervals.
-    """
+def slice_by_connectivity(sub_arr, min_w=8, thresh=25, is_glow=False):
+    """Slice non-overlapping horizontal tiles/icons."""
     h, w, _ = sub_arr.shape
-    dist = 255.0 - np.min(sub_arr, axis=2)
-    has_content = np.max(dist, axis=0) > thresh
+    if is_glow:
+        rgba = color_to_alpha_white(sub_arr)
+    else:
+        rgba = flood_fill_solid(sub_arr)
+        
+    has_content = np.max(rgba[:, :, 3], axis=0) > thresh
 
     intervals = []
     in_i = False
@@ -182,29 +217,14 @@ def slice_by_connectivity(sub_arr, min_w=6, thresh=25, pad_x=2):
 
     crops = []
     for s, e in intervals:
-        pad_s = max(0, s - pad_x)
-        pad_e = min(w, e + pad_x)
-        crops.append(sub_arr[:, pad_s:pad_e])
+        frame_rgba = np.zeros_like(rgba)
+        frame_rgba[:, s:e] = rgba[:, s:e]
+        trimmed = trim_rgba(frame_rgba, pad=0, alpha_thresh=thresh)
+        if trimmed.shape[0] >= 2 and trimmed.shape[1] >= 2:
+            crops.append(trimmed)
     return crops
 
-def export_animation(crops, out_dir, cell_size, pivot="bottom_center", ground_offset=4):
-    os.makedirs(out_dir, exist_ok=True)
-    frames = []
-    for idx, crop in enumerate(crops):
-        rgba = remove_white_bg(crop)
-        trimmed = trim_rgba(rgba)
-        if trimmed.shape[0] < 2 or trimmed.shape[1] < 2:
-            continue
-        cell_img = place_in_cell(trimmed, cell_size=cell_size, pivot=pivot, ground_offset=ground_offset)
-        out_file = os.path.join(out_dir, f"{len(frames):02d}.png")
-        cell_img.save(out_file)
-        frames.append(out_file)
-    return frames
-
 def generate_sprite_frames_tres(group_name, anim_dict, tres_path):
-    """
-    anim_dict: { anim_name: [list of relative image paths res://...] }
-    """
     ext_resources = []
     res_id_map = {}
     
@@ -224,7 +244,7 @@ def generate_sprite_frames_tres(group_name, anim_dict, tres_path):
             rid = res_id_map[p]
             frame_entries.append(f'{{\n"duration": 1.0,\n"texture": ExtResource("{rid}")\n}}')
         frames_joined = ",\n".join(frame_entries)
-        loop_str = "true" if anim_name in ["idle", "run", "walk", "bounce", "effect", "aura"] else "false"
+        loop_str = "true" if anim_name in ["idle", "run", "walk", "bounce", "effect", "aura", "portal", "attack"] else "false"
         speed = 10.0 if anim_name in ["idle", "run", "walk"] else 12.0
         anim_blocks.append(f"""{{
 "frames": [
@@ -255,17 +275,17 @@ def run_slicer():
         print(f"Error: {SOURCE_PATH} not found!")
         sys.exit(1)
 
-    img = Image.open(SOURCE_PATH)
+    img = Image.open(SOURCE_PATH).convert("RGB")
     arr = np.array(img)
     print(f"Loaded {SOURCE_PATH} (size: {img.size})")
 
     report = {}
 
     # ─────────────────────────────────────────────────────────────
-    # 1. BALL ANIMATIONS (Cell: 64x64, pivot: bottom_center, ground_offset=8)
+    # 1. BALL ANIMATIONS (Glow = True, Cell: 64x64, pivot: center)
     # ─────────────────────────────────────────────────────────────
     ball_specs = [
-        ("idle", 16, (22, 65, 10, 520), {"min_dist": 22, "dark_core": True}),
+        ("idle", 16, (26, 65, 10, 520), {"min_dist": 22, "dark_core": True}),
         ("run", 24, (78, 120, 10, 520), {"min_dist": 16, "dark_core": True}),
         ("jump", 16, (132, 172, 10, 520), {"min_dist": 20, "dark_core": True}),
         ("fall", 12, (185, 228, 10, 520), {"min_dist": 24, "dark_core": True}),
@@ -280,17 +300,23 @@ def run_slicer():
     for name, labeled_count, box, opts in ball_specs:
         y0, y1, x0, x1 = box
         sub = arr[y0:y1, x0:x1]
-        crops = slice_by_peaks(sub, min_dist=opts["min_dist"], dark_core=opts["dark_core"])
+        cells = slice_strip_isolated(sub, is_glow=True, min_dist=opts["min_dist"], dark_core=opts["dark_core"],
+                                     cell_size=(64, 64), pivot="center")
         out_dir = os.path.join(OUTPUT_BASE, "ball", name)
-        frames = export_animation(crops, out_dir, cell_size=(64, 64), pivot="bottom_center", ground_offset=8)
-        ball_frames_map[name] = [f"res://{f}" for f in frames]
-        report[f"ball/{name}"] = {"labeled": labeled_count, "extracted": len(frames)}
+        os.makedirs(out_dir, exist_ok=True)
+        paths = []
+        for idx, cell in enumerate(cells):
+            p = os.path.join(out_dir, f"{idx:02d}.png")
+            cell.save(p)
+            paths.append(f"res://{p}")
+        ball_frames_map[name] = paths
+        report[f"ball/{name}"] = {"labeled": labeled_count, "extracted": len(cells)}
 
     # ─────────────────────────────────────────────────────────────
-    # 2. REWIND ANIMATIONS (Cell: 64x64, pivot: center)
+    # 2. REWIND ANIMATIONS (Glow = True, Cell: 64x64, pivot: center)
     # ─────────────────────────────────────────────────────────────
     rewind_specs = [
-        ("effect", 24, (22, 65, 535, 1020), {"min_dist": 16}),
+        ("effect", 24, (26, 65, 535, 1020), {"min_dist": 16}),
         ("aura", 16, (80, 120, 535, 1020), {"min_dist": 18}),
         ("restore", 12, (136, 175, 535, 1020), {"min_dist": 24}),
     ]
@@ -299,14 +325,20 @@ def run_slicer():
     for name, labeled_count, box, opts in rewind_specs:
         y0, y1, x0, x1 = box
         sub = arr[y0:y1, x0:x1]
-        crops = slice_by_peaks(sub, min_dist=opts["min_dist"], dark_core=False)
+        cells = slice_strip_isolated(sub, is_glow=True, min_dist=opts["min_dist"], dark_core=False,
+                                     cell_size=(64, 64), pivot="center")
         out_dir = os.path.join(OUTPUT_BASE, "rewind", name)
-        frames = export_animation(crops, out_dir, cell_size=(64, 64), pivot="center")
-        rewind_frames_map[name] = [f"res://{f}" for f in frames]
-        report[f"rewind/{name}"] = {"labeled": labeled_count, "extracted": len(frames)}
+        os.makedirs(out_dir, exist_ok=True)
+        paths = []
+        for idx, cell in enumerate(cells):
+            p = os.path.join(out_dir, f"{idx:02d}.png")
+            cell.save(p)
+            paths.append(f"res://{p}")
+        rewind_frames_map[name] = paths
+        report[f"rewind/{name}"] = {"labeled": labeled_count, "extracted": len(cells)}
 
     # ─────────────────────────────────────────────────────────────
-    # 3. GUARD ANIMATIONS (Cell: 96x96, pivot: bottom_center, ground_offset=10)
+    # 3. GUARD ANIMATIONS (Solid = True, Cell: 96x96, pivot: bottom_center, ground_offset=6)
     # ─────────────────────────────────────────────────────────────
     guard_specs = [
         ("idle", 8, (215, 260, 595, 645), {"min_dist": 12}),
@@ -322,23 +354,29 @@ def run_slicer():
     for name, labeled_count, box, opts in guard_specs:
         y0, y1, x0, x1 = box
         sub = arr[y0:y1, x0:x1]
-        crops = slice_by_peaks(sub, min_dist=opts["min_dist"], dark_core=True)
+        cells = slice_strip_isolated(sub, is_glow=False, min_dist=opts["min_dist"], dark_core=True,
+                                     cell_size=(96, 96), pivot="bottom_center", ground_offset=6)
         out_dir = os.path.join(OUTPUT_BASE, "guard", name)
-        frames = export_animation(crops, out_dir, cell_size=(96, 96), pivot="bottom_center", ground_offset=10)
-        guard_frames_map[name] = [f"res://{f}" for f in frames]
-        report[f"guard/{name}"] = {"labeled": labeled_count, "extracted": len(frames)}
+        os.makedirs(out_dir, exist_ok=True)
+        paths = []
+        for idx, cell in enumerate(cells):
+            p = os.path.join(out_dir, f"{idx:02d}.png")
+            cell.save(p)
+            paths.append(f"res://{p}")
+        guard_frames_map[name] = paths
+        report[f"guard/{name}"] = {"labeled": labeled_count, "extracted": len(cells)}
 
     # Guard portrait
     p_crop = arr[195:300, 530:590]
-    p_rgba = trim_rgba(remove_white_bg(p_crop))
-    p_cell = place_in_cell(p_rgba, cell_size=(96, 96), pivot="bottom_center", ground_offset=10)
+    p_rgba = trim_rgba(flood_fill_solid(p_crop))
+    p_cell = place_in_cell(p_rgba, cell_size=(96, 96), pivot="bottom_center", ground_offset=6)
     p_dir = os.path.join(OUTPUT_BASE, "guard", "portrait")
     os.makedirs(p_dir, exist_ok=True)
     p_cell.save(os.path.join(p_dir, "00.png"))
     guard_frames_map["portrait"] = [f"res://{p_dir}/00.png"]
 
     # ─────────────────────────────────────────────────────────────
-    # 4. BOSS ANIMATIONS (Cell: 128x128, pivot: bottom_center, ground_offset=12)
+    # 4. BOSS ANIMATIONS (Solid = True, Cell: 128x128, pivot: bottom_center, ground_offset=8)
     # ─────────────────────────────────────────────────────────────
     boss_specs = [
         ("idle", 8, (345, 400, 585, 680), {"min_dist": 12}),
@@ -351,23 +389,29 @@ def run_slicer():
     for name, labeled_count, box, opts in boss_specs:
         y0, y1, x0, x1 = box
         sub = arr[y0:y1, x0:x1]
-        crops = slice_by_peaks(sub, min_dist=opts["min_dist"], dark_core=True)
+        cells = slice_strip_isolated(sub, is_glow=False, min_dist=opts["min_dist"], dark_core=True,
+                                     cell_size=(128, 128), pivot="bottom_center", ground_offset=8)
         out_dir = os.path.join(OUTPUT_BASE, "boss", name)
-        frames = export_animation(crops, out_dir, cell_size=(128, 128), pivot="bottom_center", ground_offset=12)
-        boss_frames_map[name] = [f"res://{f}" for f in frames]
-        report[f"boss/{name}"] = {"labeled": labeled_count, "extracted": len(frames)}
+        os.makedirs(out_dir, exist_ok=True)
+        paths = []
+        for idx, cell in enumerate(cells):
+            p = os.path.join(out_dir, f"{idx:02d}.png")
+            cell.save(p)
+            paths.append(f"res://{p}")
+        boss_frames_map[name] = paths
+        report[f"boss/{name}"] = {"labeled": labeled_count, "extracted": len(cells)}
 
     # Boss portrait
     bp_crop = arr[330:450, 520:585]
-    bp_rgba = trim_rgba(remove_white_bg(bp_crop))
-    bp_cell = place_in_cell(bp_rgba, cell_size=(128, 128), pivot="bottom_center", ground_offset=12)
+    bp_rgba = trim_rgba(flood_fill_solid(bp_crop))
+    bp_cell = place_in_cell(bp_rgba, cell_size=(128, 128), pivot="bottom_center", ground_offset=8)
     bp_dir = os.path.join(OUTPUT_BASE, "boss", "portrait")
     os.makedirs(bp_dir, exist_ok=True)
     bp_cell.save(os.path.join(bp_dir, "00.png"))
     boss_frames_map["portrait"] = [f"res://{bp_dir}/00.png"]
 
     # ─────────────────────────────────────────────────────────────
-    # 5. VFX ANIMATIONS (Cell: 96x96, pivot: center)
+    # 5. VFX ANIMATIONS (Glow = True, Cell: 96x96, pivot: center)
     # ─────────────────────────────────────────────────────────────
     vfx_specs = [
         ("bounce_impact", 12, (490, 535, 5, 160), {"min_dist": 16}),
@@ -384,45 +428,92 @@ def run_slicer():
     for name, labeled_count, box, opts in vfx_specs:
         y0, y1, x0, x1 = box
         sub = arr[y0:y1, x0:x1]
-        crops = slice_by_peaks(sub, min_dist=opts["min_dist"], dark_core=False)
-        out_dir = os.path.join(OUTPUT_BASE, "vfx", name)
         cs = (128, 64) if name in ["dash_trail", "stage_transition"] else (96, 96)
-        frames = export_animation(crops, out_dir, cell_size=cs, pivot="center")
-        vfx_frames_map[name] = [f"res://{f}" for f in frames]
-        report[f"vfx/{name}"] = {"labeled": labeled_count, "extracted": len(frames)}
+        cells = slice_strip_isolated(sub, is_glow=True, min_dist=opts["min_dist"], dark_core=False,
+                                     cell_size=cs, pivot="center")
+        out_dir = os.path.join(OUTPUT_BASE, "vfx", name)
+        os.makedirs(out_dir, exist_ok=True)
+        paths = []
+        for idx, cell in enumerate(cells):
+            p = os.path.join(out_dir, f"{idx:02d}.png")
+            cell.save(p)
+            paths.append(f"res://{p}")
+        vfx_frames_map[name] = paths
+        report[f"vfx/{name}"] = {"labeled": labeled_count, "extracted": len(cells)}
 
     # ─────────────────────────────────────────────────────────────
     # 6. PROPS & HAZARDS
     # ─────────────────────────────────────────────────────────────
-    props_specs = [
-        ("props", "evidence", 8, (560, 605, 10, 160), {"min_dist": 18}),
-        ("props", "checkpoint", 8, (560, 605, 165, 275), {"min_dist": 18}),
-        ("props", "crate", 3, (560, 605, 280, 430), {"min_dist": 30}),
-        ("hazards", "spikes", 4, (560, 605, 440, 540), {"min_dist": 22}),
-        ("hazards", "electric_arc", 16, (560, 605, 545, 660), {"min_dist": 20}),
-        ("hazards", "power_node", 8, (560, 605, 665, 760), {"min_dist": 20}),
-    ]
+    # Evidence (Glow = True, y: 570..605, x: 10..160)
+    ev_sub = arr[570:605, 10:160]
+    ev_cells = slice_strip_isolated(ev_sub, is_glow=True, min_dist=18, cell_size=(64, 64), pivot="center")
+    ev_dir = os.path.join(OUTPUT_BASE, "props", "evidence")
+    os.makedirs(ev_dir, exist_ok=True)
+    for idx, c in enumerate(ev_cells):
+        c.save(os.path.join(ev_dir, f"{idx:02d}.png"))
+    report["props/evidence"] = {"labeled": 8, "extracted": len(ev_cells)}
 
-    for group, name, labeled_count, box, opts in props_specs:
-        y0, y1, x0, x1 = box
-        sub = arr[y0:y1, x0:x1]
-        crops = slice_by_peaks(sub, min_dist=opts["min_dist"], dark_core=False)
-        out_dir = os.path.join(OUTPUT_BASE, group, name)
-        cs = (128, 48) if name == "electric_arc" else (64, 64)
-        frames = export_animation(crops, out_dir, cell_size=cs, pivot="bottom_center", ground_offset=4)
-        report[f"{group}/{name}"] = {"labeled": labeled_count, "extracted": len(frames)}
+    # Checkpoint Flag (Solid = True, y: 565..605, x: 165..275)
+    flag_sub = arr[565:605, 165:275]
+    flag_cells = slice_strip_isolated(flag_sub, is_glow=False, min_dist=18, cell_size=(64, 64), pivot="bottom_center", ground_offset=4)
+    flag_dir = os.path.join(OUTPUT_BASE, "props", "checkpoint")
+    os.makedirs(flag_dir, exist_ok=True)
+    for idx, c in enumerate(flag_cells):
+        c.save(os.path.join(flag_dir, f"{idx:02d}.png"))
+    report["props/checkpoint"] = {"labeled": 8, "extracted": len(flag_cells)}
+
+    # Crate (Solid = True, y: 560..605, x: 280..430)
+    crate_sub = arr[560:605, 280:430]
+    crate_cells = slice_strip_isolated(crate_sub, is_glow=False, min_dist=30, cell_size=(64, 64), pivot="bottom_center", ground_offset=4)
+    crate_dir = os.path.join(OUTPUT_BASE, "props", "crate")
+    os.makedirs(crate_dir, exist_ok=True)
+    for idx, c in enumerate(crate_cells):
+        c.save(os.path.join(crate_dir, f"{idx:02d}.png"))
+    report["props/crate"] = {"labeled": 3, "extracted": len(crate_cells)}
+
+    # Spikes (Solid = True, y: 565..605, x: 440..540)
+    spikes_sub = arr[565:605, 440:540]
+    spikes_cells = slice_strip_isolated(spikes_sub, is_glow=False, min_dist=22, cell_size=(64, 48), pivot="bottom_center", ground_offset=4)
+    spikes_dir = os.path.join(OUTPUT_BASE, "hazards", "spikes")
+    os.makedirs(spikes_dir, exist_ok=True)
+    for idx, c in enumerate(spikes_cells):
+        c.save(os.path.join(spikes_dir, f"{idx:02d}.png"))
+    report["hazards/spikes"] = {"labeled": 4, "extracted": len(spikes_cells)}
+
+    # Electric Arc (Glow = True, y: 575..595, x: 550..675)
+    # Extract the full continuous lightning beam
+    arc_full_crop = arr[578:594, 555:675]
+    arc_full_rgba = trim_rgba(color_to_alpha_white(arc_full_crop))
+    arc_dir = os.path.join(OUTPUT_BASE, "hazards", "electric_arc")
+    os.makedirs(arc_dir, exist_ok=True)
+    Image.fromarray(arc_full_rgba).save(os.path.join(arc_dir, "beam.png"))
+    
+    # Also extract individual pulses for animated sprite
+    arc_sub = arr[576:595, 550:675]
+    arc_cells = slice_strip_isolated(arc_sub, is_glow=True, min_dist=18, cell_size=(128, 48), pivot="center")
+    for idx, c in enumerate(arc_cells):
+        c.save(os.path.join(arc_dir, f"{idx:02d}.png"))
+    report["hazards/electric_arc"] = {"labeled": 16, "extracted": len(arc_cells)}
+
+    # Power Node (Glow = True, y: 565..605, x: 675..760)
+    node_sub = arr[565:605, 675:760]
+    node_cells = slice_strip_isolated(node_sub, is_glow=True, min_dist=20, cell_size=(64, 64), pivot="bottom_center", ground_offset=4)
+    node_dir = os.path.join(OUTPUT_BASE, "hazards", "power_node")
+    os.makedirs(node_dir, exist_ok=True)
+    for idx, c in enumerate(node_cells):
+        c.save(os.path.join(node_dir, f"{idx:02d}.png"))
+    report["hazards/power_node"] = {"labeled": 8, "extracted": len(node_cells)}
 
     # ─────────────────────────────────────────────────────────────
     # 7. PLATFORM TILES (y: 630..675, x: 5..470)
     # ─────────────────────────────────────────────────────────────
     tiles_sub = arr[630:675, 5:470]
-    tile_crops = slice_by_connectivity(tiles_sub, min_w=10, thresh=25)
+    tile_crops = slice_by_connectivity(tiles_sub, min_w=10, thresh=25, is_glow=False)
     tiles_dir = os.path.join(OUTPUT_BASE, "tiles")
     os.makedirs(tiles_dir, exist_ok=True)
     tile_names = ["ground", "hazard", "inset", "block", "slope", "pillar", "scaffold_wide", "scaffold_mid", "crate_tile", "ladder"]
     for idx, crop in enumerate(tile_crops):
-        t_rgba = trim_rgba(remove_white_bg(crop))
-        t_img = Image.fromarray(t_rgba)
+        t_img = Image.fromarray(crop)
         name = tile_names[idx] if idx < len(tile_names) else f"tile_{idx:02d}"
         t_img.save(os.path.join(tiles_dir, f"{name}.png"))
     report["tiles"] = {"labeled": 10, "extracted": len(tile_crops)}
@@ -431,13 +522,12 @@ def run_slicer():
     # 8. UI ELEMENTS (y: 632..665, x: 480..760)
     # ─────────────────────────────────────────────────────────────
     ui_sub = arr[632:665, 480:760]
-    ui_crops = slice_by_connectivity(ui_sub, min_w=8, thresh=25)
+    ui_crops = slice_by_connectivity(ui_sub, min_w=8, thresh=25, is_glow=False)
     ui_dir = os.path.join(OUTPUT_BASE, "ui")
     os.makedirs(ui_dir, exist_ok=True)
     ui_names = ["heart", "coin", "gem", "gear", "pause", "play", "check", "cross", "document"]
     for idx, crop in enumerate(ui_crops):
-        u_rgba = trim_rgba(remove_white_bg(crop))
-        u_cell = place_in_cell(u_rgba, cell_size=(32, 32), pivot="center")
+        u_cell = place_in_cell(crop, cell_size=(32, 32), pivot="center")
         name = ui_names[idx] if idx < len(ui_names) else f"icon_{idx:02d}"
         u_cell.save(os.path.join(ui_dir, f"{name}.png"))
     report["ui"] = {"labeled": 9, "extracted": len(ui_crops)}
@@ -447,11 +537,10 @@ def run_slicer():
     # ─────────────────────────────────────────────────────────────
     story_dir = os.path.join(OUTPUT_BASE, "story")
     os.makedirs(story_dir, exist_ok=True)
-    # The 3 panels are at x intervals: (784, 848), (854, 928), (934, 1016)
     p_intervals = [(784, 848), (854, 928), (934, 1016)]
     for idx, (px0, px1) in enumerate(p_intervals):
         crop = arr[560:665, px0:px1]
-        s_rgba = trim_rgba(remove_white_bg(crop))
+        s_rgba = trim_rgba(flood_fill_solid(crop))
         s_img = Image.fromarray(s_rgba)
         s_img.save(os.path.join(story_dir, f"panel_{idx+1}.png"))
     report["story"] = {"labeled": 3, "extracted": len(p_intervals)}
@@ -474,7 +563,6 @@ def run_slicer():
     os.makedirs("assets/sprites/vfx", exist_ok=True)
     generate_sprite_frames_tres("vfx", vfx_frames_map, "assets/sprites/vfx/vfx_frames.tres")
 
-    # Save summary report
     with open("assets/sprites/slicing_report.json", "w") as f:
         json.dump(report, f, indent=2)
 

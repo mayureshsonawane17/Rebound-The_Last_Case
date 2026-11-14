@@ -13,7 +13,7 @@
   },
   "ball/fall": {
     "labeled": 12,
-    "extracted": 15
+    "extracted": 17
   },
   "ball/land": {
     "labeled": 16,
@@ -21,7 +21,7 @@
   },
   "ball/bounce": {
     "labeled": 20,
-    "extracted": 15
+    "extracted": 17
   },
   "ball/wall_jump": {
     "labeled": 12,
@@ -29,19 +29,19 @@
   },
   "ball/hit": {
     "labeled": 12,
-    "extracted": 13
+    "extracted": 14
   },
   "ball/death": {
     "labeled": 16,
-    "extracted": 14
+    "extracted": 11
   },
   "rewind/effect": {
     "labeled": 24,
-    "extracted": 21
+    "extracted": 14
   },
   "rewind/aura": {
     "labeled": 16,
-    "extracted": 18
+    "extracted": 20
   },
   "rewind/restore": {
     "labeled": 12,
@@ -53,7 +53,7 @@
   },
   "guard/walk": {
     "labeled": 16,
-    "extracted": 9
+    "extracted": 11
   },
   "guard/alert": {
     "labeled": 8,
@@ -61,7 +61,7 @@
   },
   "guard/aim": {
     "labeled": 8,
-    "extracted": 3
+    "extracted": 4
   },
   "guard/shoot": {
     "labeled": 10,
@@ -89,23 +89,23 @@
   },
   "boss/defeat": {
     "labeled": 12,
-    "extracted": 8
+    "extracted": 11
   },
   "vfx/bounce_impact": {
     "labeled": 12,
-    "extracted": 5
+    "extracted": 4
   },
   "vfx/dash_trail": {
     "labeled": 16,
-    "extracted": 5
+    "extracted": 3
   },
   "vfx/ground_dash": {
     "labeled": 16,
-    "extracted": 4
+    "extracted": 2
   },
   "vfx/spark": {
     "labeled": 8,
-    "extracted": 4
+    "extracted": 2
   },
   "vfx/explosion": {
     "labeled": 16,
@@ -117,11 +117,11 @@
   },
   "vfx/portal": {
     "labeled": 12,
-    "extracted": 5
+    "extracted": 4
   },
   "vfx/stage_transition": {
     "labeled": 16,
-    "extracted": 10
+    "extracted": 7
   },
   "props/evidence": {
     "labeled": 8,
@@ -129,7 +129,7 @@
   },
   "props/checkpoint": {
     "labeled": 8,
-    "extracted": 4
+    "extracted": 3
   },
   "props/crate": {
     "labeled": 3,
@@ -141,11 +141,11 @@
   },
   "hazards/electric_arc": {
     "labeled": 16,
-    "extracted": 5
+    "extracted": 4
   },
   "hazards/power_node": {
     "labeled": 8,
-    "extracted": 4
+    "extracted": 3
   },
   "tiles": {
     "labeled": 10,

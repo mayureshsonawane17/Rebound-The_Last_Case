@@ -4,6 +4,7 @@ signal evidence_collected(id: String)
 
 @export var evidence_id: String = "evidence_1"
 @export var texture: Texture2D
+@export var sprite_scale: Vector2 = Vector2.ONE
 
 var collected: bool = false
 var pulse_time: float = 0.0
@@ -29,7 +30,8 @@ func _on_body_entered(body: Node2D) -> void:
 		collected = true
 		set_deferred("monitoring", false)
 		evidence_collected.emit(evidence_id)
-		# Audio feedback hook (null-safe) if sound exists
+		if has_node("/root/AudioManager"):
+			get_node("/root/AudioManager").play_sfx("evidence_collect")
 
 func capture_rewind_state() -> Dictionary:
 	return {
@@ -47,9 +49,10 @@ func restore_rewind_state(state: Dictionary) -> void:
 func _draw() -> void:
 	if collected:
 		return
-	var pulse_step: int = int(pulse_time * 6.0) % 2
-	var offset_y: float = -2.0 if pulse_step == 1 else 0.0
-	draw_set_transform(Vector2(0, offset_y))
+	var offset_y: float = sin(pulse_time * 3.5) * 3.0
+	draw_set_transform(Vector2(0, offset_y), 0.0, sprite_scale)
+	var glow_alpha: float = 0.2 + 0.12 * sin(pulse_time * 4.5)
+	draw_rect(Rect2(-20, -24, 40, 48), Color(0.94, 0.78, 0.45, glow_alpha))
 	if texture:
 		draw_texture_rect(texture, Rect2(-18, -22, 36, 44), false)
 	else:

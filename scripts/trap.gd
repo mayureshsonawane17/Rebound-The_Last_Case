@@ -14,6 +14,8 @@ const ELECTRIC_SIZE := Vector2(40, 60)
 @export var fall_speed: float = 750.0
 @export var cycle_time: float = 2.0
 @export var texture: Texture2D
+@export var arc_texture: Texture2D
+@export var sprite_scale: Vector2 = Vector2.ONE
 @export_range(0.1, 10.0, 0.1) var reset_delay: float = 1.25
 
 var initial_position: Vector2 = Vector2.ZERO
@@ -47,6 +49,8 @@ func _ready() -> void:
 					texture = load("res://assets/sprites/hazards/power_node/00.png")
 				elif ResourceLoader.exists("res://assets/props/hazard_electric.png"):
 					texture = load("res://assets/props/hazard_electric.png")
+				if not arc_texture and ResourceLoader.exists("res://assets/sprites/hazards/electric_arc/beam.png"):
+					arc_texture = load("res://assets/sprites/hazards/electric_arc/beam.png")
 
 func _physics_process(delta: float) -> void:
 	if RewindManager.is_rewinding:
@@ -122,6 +126,7 @@ func reset_trap() -> bool:
 
 func _update_electric_phase() -> void:
 	var cycle_pos: float = fposmod(time_elapsed, maxf(cycle_time, 0.2)) / maxf(cycle_time, 0.2)
+	var prev_hazard := active_hazard
 	if cycle_pos < 0.25:
 		electric_phase = ElectricPhase.CHARGING
 	elif cycle_pos < 0.60:
@@ -129,6 +134,8 @@ func _update_electric_phase() -> void:
 	else:
 		electric_phase = ElectricPhase.COOLDOWN
 	active_hazard = electric_phase == ElectricPhase.DISCHARGE
+	if not prev_hazard and active_hazard:
+		AudioManager.play_sfx("arc_zap")
 
 func _process_electrical(_delta: float) -> void:
 	_update_electric_phase()
@@ -253,6 +260,10 @@ func _draw() -> void:
 				# Filled outline is exactly the damaging rectangle, including corners.
 				draw_rect(field, Color(0.28, 0.85, 0.91, 0.3))
 				draw_rect(field, Color("48d9e8"), false, 1)
+				if arc_texture:
+					var arc_alpha: float = 0.8 + 0.2 * sin(time_elapsed * 32.0)
+					var arc_color := Color(1.0, 1.0, 1.0, arc_alpha)
+					draw_texture_rect(arc_texture, Rect2(-30, -32, 60, 24), false, arc_color)
 				# Stepped cyan pixel lightning bolt
 				var cyan_core := Color("61e3ec")
 				var cyan_glow := Color(0.2, 0.8, 0.95, 0.3)

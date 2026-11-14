@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=31 format=3]
+[gd_resource type="SpriteFrames" load_steps=34 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/guard/idle/00.png" id="Ext_1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/guard/idle/01.png" id="Ext_2"]
@@ -11,25 +11,28 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/guard/walk/06.png" id="Ext_9"]
 [ext_resource type="Texture2D" path="res://assets/sprites/guard/walk/07.png" id="Ext_10"]
 [ext_resource type="Texture2D" path="res://assets/sprites/guard/walk/08.png" id="Ext_11"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/alert/00.png" id="Ext_12"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/alert/01.png" id="Ext_13"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/alert/02.png" id="Ext_14"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/aim/00.png" id="Ext_15"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/aim/01.png" id="Ext_16"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/aim/02.png" id="Ext_17"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/shoot/00.png" id="Ext_18"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/shoot/01.png" id="Ext_19"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/shoot/02.png" id="Ext_20"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/shoot/03.png" id="Ext_21"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/hit/00.png" id="Ext_22"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/hit/01.png" id="Ext_23"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/00.png" id="Ext_24"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/01.png" id="Ext_25"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/02.png" id="Ext_26"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/03.png" id="Ext_27"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/04.png" id="Ext_28"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/05.png" id="Ext_29"]
-[ext_resource type="Texture2D" path="res://assets/sprites/guard/portrait/00.png" id="Ext_30"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/walk/09.png" id="Ext_12"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/walk/10.png" id="Ext_13"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/alert/00.png" id="Ext_14"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/alert/01.png" id="Ext_15"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/alert/02.png" id="Ext_16"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/aim/00.png" id="Ext_17"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/aim/01.png" id="Ext_18"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/aim/02.png" id="Ext_19"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/aim/03.png" id="Ext_20"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/shoot/00.png" id="Ext_21"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/shoot/01.png" id="Ext_22"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/shoot/02.png" id="Ext_23"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/shoot/03.png" id="Ext_24"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/hit/00.png" id="Ext_25"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/hit/01.png" id="Ext_26"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/00.png" id="Ext_27"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/01.png" id="Ext_28"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/02.png" id="Ext_29"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/03.png" id="Ext_30"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/04.png" id="Ext_31"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/defeat/05.png" id="Ext_32"]
+[ext_resource type="Texture2D" path="res://assets/sprites/guard/portrait/00.png" id="Ext_33"]
 
 [resource]
 animations = [
@@ -85,6 +88,14 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_11")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_12")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_13")
 }
 ],
 "loop": true,
@@ -95,15 +106,15 @@ animations = [
 "frames": [
 {
 "duration": 1.0,
-"texture": ExtResource("Ext_12")
-},
-{
-"duration": 1.0,
-"texture": ExtResource("Ext_13")
-},
-{
-"duration": 1.0,
 "texture": ExtResource("Ext_14")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_15")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_16")
 }
 ],
 "loop": false,
@@ -114,23 +125,8 @@ animations = [
 "frames": [
 {
 "duration": 1.0,
-"texture": ExtResource("Ext_15")
-},
-{
-"duration": 1.0,
-"texture": ExtResource("Ext_16")
-},
-{
-"duration": 1.0,
 "texture": ExtResource("Ext_17")
-}
-],
-"loop": false,
-"name": &"aim",
-"speed": 12.0
 },
-{
-"frames": [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_18")
@@ -142,10 +138,29 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_20")
+}
+],
+"loop": false,
+"name": &"aim",
+"speed": 12.0
 },
+{
+"frames": [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_21")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_22")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_23")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_24")
 }
 ],
 "loop": false,
@@ -156,11 +171,11 @@ animations = [
 "frames": [
 {
 "duration": 1.0,
-"texture": ExtResource("Ext_22")
+"texture": ExtResource("Ext_25")
 },
 {
 "duration": 1.0,
-"texture": ExtResource("Ext_23")
+"texture": ExtResource("Ext_26")
 }
 ],
 "loop": false,
@@ -169,18 +184,6 @@ animations = [
 },
 {
 "frames": [
-{
-"duration": 1.0,
-"texture": ExtResource("Ext_24")
-},
-{
-"duration": 1.0,
-"texture": ExtResource("Ext_25")
-},
-{
-"duration": 1.0,
-"texture": ExtResource("Ext_26")
-},
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_27")
@@ -192,6 +195,18 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_29")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_30")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_31")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_32")
 }
 ],
 "loop": false,
@@ -202,7 +217,7 @@ animations = [
 "frames": [
 {
 "duration": 1.0,
-"texture": ExtResource("Ext_30")
+"texture": ExtResource("Ext_33")
 }
 ],
 "loop": false,

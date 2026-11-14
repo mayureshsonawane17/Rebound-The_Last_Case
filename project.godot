@@ -16,6 +16,7 @@ config/features=PackedStringArray("4.7")
 
 [autoload]
 
+AudioManager="*res://scripts/audio_manager.gd"
 GameManager="*res://scripts/game_manager.gd"
 RewindManager="*res://scripts/rewind_manager.gd"
 
@@ -24,10 +25,11 @@ RewindManager="*res://scripts/rewind_manager.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.025, 0.04, 0.09, 1)
+environment/defaults/default_clear_color=Color(0.0627451, 0.0941176, 0.1529412, 1)

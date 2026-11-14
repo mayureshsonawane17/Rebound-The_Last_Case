@@ -13,6 +13,8 @@ const JUMP_SPEED: float = -720.0
 @export var acceleration: float = ACCELERATION
 @export var gravity: float = GRAVITY
 @export var jump_speed: float = JUMP_SPEED
+@export var sprite_scale: Vector2 = Vector2(1.15, 1.15)
+@export var sprite_offset: Vector2 = Vector2.ZERO
 
 var coyote: float = 0.0
 var jump_buffer: float = 0.0
@@ -20,6 +22,7 @@ var dead: bool = false
 var visual_angle: float = 0.0
 var stretch := Vector2.ONE
 var checkpoint := Vector2(100, 560)
+var _was_rewinding: bool = false
 
 @onready var anim_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 @onready var rewind_vfx: AnimatedSprite2D = get_node_or_null("RewindVFX")
@@ -53,11 +56,19 @@ func _physics_process(delta: float) -> void:
 		coyote = 0.0
 		jump_buffer = 0.0
 		stretch = Vector2(0.78, 1.22)
+		if has_node("/root/AudioManager"):
+			get_node("/root/AudioManager").play_sfx("jump", 0.08)
 
 	var was_grounded := is_on_floor()
+	var fall_v := velocity.y
 	move_and_slide()
 	if not was_grounded and is_on_floor():
 		stretch = Vector2(1.25, 0.75)
+		if has_node("/root/AudioManager"):
+			if fall_v > 280.0:
+				get_node("/root/AudioManager").play_sfx("bounce", 0.08)
+			else:
+				get_node("/root/AudioManager").play_sfx("land", 0.05)
 	stretch = stretch.lerp(Vector2.ONE, minf(delta * 12.0, 1.0))
 	visual_angle += velocity.x * delta / 22.0
 
@@ -70,6 +81,8 @@ func die() -> void:
 	if not dead:
 		dead = true
 		velocity = Vector2.ZERO
+		if has_node("/root/AudioManager"):
+			get_node("/root/AudioManager").play_sfx("death")
 		queue_redraw()
 
 func reset_checkpoint() -> void:
@@ -104,6 +117,11 @@ func restore_rewind_state(state: Dictionary) -> void:
 
 func _update_animation(_delta: float) -> void:
 	if RewindManager.is_rewinding:
+		if not _was_rewinding:
+			_was_rewinding = true
+			if has_node("/root/AudioManager"):
+				get_node("/root/AudioManager").play_sfx("rewind_start")
+				get_node("/root/AudioManager").start_rewind_loop()
 		if rewind_vfx:
 			rewind_vfx.visible = true
 			if rewind_vfx.animation != "effect":
@@ -113,13 +131,20 @@ func _update_animation(_delta: float) -> void:
 				anim_sprite.play("idle")
 		return
 
+	if _was_rewinding:
+		_was_rewinding = false
+		if has_node("/root/AudioManager"):
+			get_node("/root/AudioManager").stop_rewind_loop()
+			get_node("/root/AudioManager").play_sfx("rewind_end")
+
 	if rewind_vfx and rewind_vfx.visible:
 		rewind_vfx.visible = false
 
 	if not anim_sprite:
 		return
 
-	anim_sprite.scale = stretch
+	anim_sprite.scale = stretch * sprite_scale
+	anim_sprite.offset = sprite_offset
 
 	if dead:
 		if anim_sprite.animation != "death":

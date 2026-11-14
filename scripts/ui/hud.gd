@@ -1,6 +1,6 @@
 extends CanvasLayer
 ## BounceFlux neo-noir pixel HUD.
-## Builds its entire UI procedurally in _ready(): no inspector setup, no images, no fonts.
+## Builds its UI in _ready(); bundled typography is supplied by pixel_theme.gd.
 ## Public contract (unchanged):
 ##   set_stage_name(title), set_evidence(count, total = 5), set_rewind_fraction(val),
 ##   set_hint(text), set_death_visible(is_dead), set_paused(is_paused)
@@ -338,6 +338,8 @@ func _make_label(text: String, font_size: int, color: Color, align: HorizontalAl
 	l.text = text
 	l.horizontal_alignment = align
 	l.add_theme_font_size_override("font_size", font_size)
+	if font_size >= 20:
+		l.add_theme_font_override("font", PT.HEADING_FONT)
 	l.add_theme_color_override("font_color", color)
 	return l
 

@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1"]
+[ext_resource type="FontFile" path="res://assets/fonts/Rajdhani-Bold.ttf" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/SpaceGrotesk.ttf" id="3"]
+[ext_resource type="Theme" path="res://assets/fonts/ui_typography.tres" id="4"]
+
+[sub_resource type="FontVariation" id="TitleFont"]
+base_font = ExtResource("2")
+spacing_glyph = 4
+
+[sub_resource type="FontVariation" id="SubtitleFont"]
+base_font = ExtResource("3")
+spacing_glyph = 1
+variation_opentype = {
+2003265652: 400.0
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -9,6 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4")
 script = ExtResource("1")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -43,15 +58,20 @@ theme_override_constants/separation = 22
 [node name="Title" type="Label" parent="Center/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38, 0.89, 0.93, 1)
-theme_override_font_sizes/font_size = 54
-text = "BOUNCEFLUX"
+theme_override_colors/font_shadow_color = Color(0.025, 0.04, 0.09, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("TitleFont")
+theme_override_font_sizes/font_size = 86
+text = "REBOUND"
 horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Center/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91, 0.82, 0.48, 1)
+theme_override_fonts/font = SubResource("SubtitleFont")
 theme_override_font_sizes/font_size = 20
-text = "A temporal anchor. A murdered investigator. Bouncing back for justice."
+text = "Every Bounce Uncovers a Secret."
 horizontal_alignment = 1
 
 [node name="Instructions" type="Label" parent="Center/VBox"]

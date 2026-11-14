@@ -2,7 +2,10 @@ extends RefCounted
 ## BounceFlux neo-noir pixel theme helper (Godot 4.x).
 ## No class_name on purpose: load it with
 ##   const PT := preload("res://scripts/ui/pixel_theme.gd")
-## Everything is static, no external images or fonts needed.
+## Everything is static; typography uses bundled, OFL-licensed fonts.
+
+const UI_FONT := preload("res://assets/fonts/SpaceGrotesk-Regular.tres")
+const HEADING_FONT := preload("res://assets/fonts/Rajdhani-Bold.ttf")
 
 # ── Mandatory palette ────────────────────────────────────────────────
 const INK := Color("#101827")     # background dark ink
@@ -48,6 +51,7 @@ static func flat_box(color: Color) -> StyleBoxFlat:
 ## Theme for the whole HUD tree. Also usable for future menus.
 static func build_theme() -> Theme:
 	var t := Theme.new()
+	t.default_font = UI_FONT
 	t.set_default_font_size(16)
 
 	t.set_color("font_color", "Label", TEXT)

@@ -14,7 +14,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_on_start_pressed()
 
 func _on_start_pressed() -> void:
-	GameManager.new_game()
+	get_tree().change_scene_to_file("res://scenes/intro.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

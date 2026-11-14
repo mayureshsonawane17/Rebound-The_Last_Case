@@ -115,6 +115,11 @@ func play_music(mname: String = "noir_theme") -> void:
 		_music_player.stream = stream
 		_music_player.play()
 
+func stop_music() -> void:
+	pending_music = ""
+	if is_instance_valid(_music_player) and _music_player.playing:
+		_music_player.stop()
+
 func start_rewind_loop() -> void:
 	if _sfx_cache.has("rewind_loop"):
 		_rewind_loop_player.stream = _sfx_cache["rewind_loop"]

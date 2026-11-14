@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/ending.gd" id="1"]
 [ext_resource type="FontFile" path="res://assets/fonts/Rajdhani-Bold.ttf" id="2"]
 [ext_resource type="Theme" path="res://assets/fonts/ui_typography.tres" id="3"]
+[ext_resource type="VideoStream" path="res://assets/video/outro.ogv" id="4"]
 
 [node name="Ending" type="Control"]
 layout_mode = 3
@@ -22,6 +23,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.04, 0.07, 0.12, 1)
+
+[node name="OutroPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("4")
+autoplay = true
+expand = true
+
+[node name="SkipLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -48.0
+offset_right = -24.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.913725, 0.929412, 0.94902, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+text = "PRESS [Q] TO SKIP"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1

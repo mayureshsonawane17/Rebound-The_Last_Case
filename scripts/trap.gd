@@ -24,10 +24,14 @@ func _ready() -> void:
 	if not texture:
 		match trap_type:
 			TrapType.CRATE:
-				if ResourceLoader.exists("res://assets/props/crate.png"):
+				if ResourceLoader.exists("res://assets/sprites/props/crate/00.png"):
+					texture = load("res://assets/sprites/props/crate/00.png")
+				elif ResourceLoader.exists("res://assets/props/crate.png"):
 					texture = load("res://assets/props/crate.png")
 			TrapType.ELECTRICAL:
-				if ResourceLoader.exists("res://assets/props/hazard_electric.png"):
+				if ResourceLoader.exists("res://assets/sprites/hazards/power_node/00.png"):
+					texture = load("res://assets/sprites/hazards/power_node/00.png")
+				elif ResourceLoader.exists("res://assets/props/hazard_electric.png"):
 					texture = load("res://assets/props/hazard_electric.png")
 
 func _physics_process(delta: float) -> void:

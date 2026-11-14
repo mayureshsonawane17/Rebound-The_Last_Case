@@ -1,11 +1,28 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
+
 [ext_resource type="Script" path="res://scripts/player.gd" id="1"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/ball/ball_frames.tres" id="2"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/rewind/rewind_frames.tres" id="3"]
+
 [sub_resource type="CircleShape2D" id="Shape"]
 radius = 22.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1")
 platform_floor_layers = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 0
+sprite_frames = ExtResource("2")
+animation = &"idle"
+
+[node name="RewindVFX" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 0
+sprite_frames = ExtResource("3")
+animation = &"effect"
+
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("Shape")

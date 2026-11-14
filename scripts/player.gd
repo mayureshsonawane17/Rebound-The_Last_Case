@@ -21,6 +21,9 @@ var visual_angle: float = 0.0
 var stretch := Vector2.ONE
 var checkpoint := Vector2(100, 560)
 
+@onready var anim_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
+@onready var rewind_vfx: AnimatedSprite2D = get_node_or_null("RewindVFX")
+
 func _ready() -> void:
 	add_to_group("rewindable")
 	add_to_group("player")
@@ -31,6 +34,7 @@ func _ready() -> void:
 		dead_texture = load("res://assets/characters/ball_dead.png")
 
 func _physics_process(delta: float) -> void:
+	_update_animation(delta)
 	if RewindManager.is_rewinding:
 		queue_redraw()
 		return
@@ -95,9 +99,53 @@ func restore_rewind_state(state: Dictionary) -> void:
 	stretch = state.stretch
 	coyote = state.coyote
 	jump_buffer = state.buffer
+	_update_animation(0.0)
 	queue_redraw()
 
+func _update_animation(_delta: float) -> void:
+	if RewindManager.is_rewinding:
+		if rewind_vfx:
+			rewind_vfx.visible = true
+			if rewind_vfx.animation != "effect":
+				rewind_vfx.play("effect")
+		if anim_sprite:
+			if anim_sprite.animation != "idle":
+				anim_sprite.play("idle")
+		return
+
+	if rewind_vfx and rewind_vfx.visible:
+		rewind_vfx.visible = false
+
+	if not anim_sprite:
+		return
+
+	anim_sprite.scale = stretch
+
+	if dead:
+		if anim_sprite.animation != "death":
+			anim_sprite.play("death")
+		return
+
+	if not is_on_floor():
+		if velocity.y < -50.0:
+			if anim_sprite.animation != "jump":
+				anim_sprite.play("jump")
+		elif velocity.y > 50.0:
+			if anim_sprite.animation != "fall":
+				anim_sprite.play("fall")
+	else:
+		if abs(velocity.x) > 20.0:
+			if anim_sprite.animation != "run":
+				anim_sprite.play("run")
+			anim_sprite.flip_h = (velocity.x < 0.0)
+		else:
+			if anim_sprite.animation != "idle":
+				anim_sprite.play("idle")
+
 func _draw() -> void:
+	if anim_sprite and anim_sprite.visible and anim_sprite.sprite_frames:
+		return
+
 	if dead:
 		if dead_texture:
 			draw_texture_rect(dead_texture, Rect2(-24, -24, 48, 48), false)

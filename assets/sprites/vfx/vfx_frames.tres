@@ -1,0 +1,262 @@
+[gd_resource type="SpriteFrames" load_steps=41 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/bounce_impact/00.png" id="Ext_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/bounce_impact/01.png" id="Ext_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/bounce_impact/02.png" id="Ext_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/bounce_impact/03.png" id="Ext_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/bounce_impact/04.png" id="Ext_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/dash_trail/00.png" id="Ext_6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/dash_trail/01.png" id="Ext_7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/dash_trail/02.png" id="Ext_8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/dash_trail/03.png" id="Ext_9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/dash_trail/04.png" id="Ext_10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/ground_dash/00.png" id="Ext_11"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/ground_dash/01.png" id="Ext_12"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/ground_dash/02.png" id="Ext_13"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/ground_dash/03.png" id="Ext_14"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/spark/00.png" id="Ext_15"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/spark/01.png" id="Ext_16"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/spark/02.png" id="Ext_17"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/spark/03.png" id="Ext_18"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/explosion/00.png" id="Ext_19"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/explosion/01.png" id="Ext_20"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/explosion/02.png" id="Ext_21"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/collect_spark/00.png" id="Ext_22"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/collect_spark/01.png" id="Ext_23"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/collect_spark/02.png" id="Ext_24"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/collect_spark/03.png" id="Ext_25"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/portal/00.png" id="Ext_26"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/portal/01.png" id="Ext_27"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/portal/02.png" id="Ext_28"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/portal/03.png" id="Ext_29"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/portal/04.png" id="Ext_30"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/00.png" id="Ext_31"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/01.png" id="Ext_32"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/02.png" id="Ext_33"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/03.png" id="Ext_34"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/04.png" id="Ext_35"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/05.png" id="Ext_36"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/06.png" id="Ext_37"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/07.png" id="Ext_38"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/08.png" id="Ext_39"]
+[ext_resource type="Texture2D" path="res://assets/sprites/vfx/stage_transition/09.png" id="Ext_40"]
+
+[resource]
+animations = [
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_1")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_2")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_3")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_4")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_5")
+}
+],
+"loop": false,
+"name": &"bounce_impact",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_6")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_7")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_8")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_9")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_10")
+}
+],
+"loop": false,
+"name": &"dash_trail",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_11")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_12")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_13")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_14")
+}
+],
+"loop": false,
+"name": &"ground_dash",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_15")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_16")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_17")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_18")
+}
+],
+"loop": false,
+"name": &"spark",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_19")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_20")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_21")
+}
+],
+"loop": false,
+"name": &"explosion",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_22")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_23")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_24")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_25")
+}
+],
+"loop": false,
+"name": &"collect_spark",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_26")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_27")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_28")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_29")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_30")
+}
+],
+"loop": false,
+"name": &"portal",
+"speed": 12.0
+},
+{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_31")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_32")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_33")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_34")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_35")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_36")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_37")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_38")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_39")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_40")
+}
+],
+"loop": false,
+"name": &"stage_transition",
+"speed": 12.0
+}
+]

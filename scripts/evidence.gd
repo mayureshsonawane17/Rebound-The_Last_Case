@@ -11,8 +11,11 @@ var pulse_time: float = 0.0
 func _ready() -> void:
 	add_to_group("rewindable")
 	body_entered.connect(_on_body_entered)
-	if not texture and ResourceLoader.exists("res://assets/props/evidence.png"):
-		texture = load("res://assets/props/evidence.png")
+	if not texture:
+		if ResourceLoader.exists("res://assets/sprites/props/evidence/00.png"):
+			texture = load("res://assets/sprites/props/evidence/00.png")
+		elif ResourceLoader.exists("res://assets/props/evidence.png"):
+			texture = load("res://assets/props/evidence.png")
 
 func _physics_process(delta: float) -> void:
 	if not RewindManager.is_rewinding:

@@ -20,9 +20,15 @@ func _physics_process(_delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body.name == "Player":
 		exit_reached.emit()
+		if has_node("/root/AudioManager"):
+			get_node("/root/AudioManager").play_sfx("stage_clear")
 
 func set_unlocked(val: bool) -> void:
+	var was_locked := locked
 	locked = not val
+	if was_locked and not locked:
+		if has_node("/root/AudioManager"):
+			get_node("/root/AudioManager").play_sfx("portal")
 	queue_redraw()
 
 func _draw() -> void:

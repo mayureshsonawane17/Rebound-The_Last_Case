@@ -7,6 +7,8 @@ signal player_touched
 @export var is_boss: bool = false
 @export var texture: Texture2D
 @export var disabled_texture: Texture2D
+@export var sprite_scale: Vector2 = Vector2(1.4, 1.4)
+@export var sprite_offset: Vector2 = Vector2.ZERO
 
 var origin_x: float = 0.0
 var direction: float = 1.0
@@ -21,6 +23,7 @@ func _ready() -> void:
 	origin_x = position.x
 	if anim_sprite:
 		if is_boss:
+			sprite_scale = Vector2(1.45, 1.45)
 			if ResourceLoader.exists("res://assets/sprites/boss/boss_frames.tres"):
 				anim_sprite.sprite_frames = load("res://assets/sprites/boss/boss_frames.tres")
 				anim_sprite.position = Vector2(0, -64)
@@ -77,6 +80,8 @@ func knock_out() -> void:
 		disabled = true
 		velocity = Vector2.ZERO
 		_update_animation()
+		if has_node("/root/AudioManager"):
+			get_node("/root/AudioManager").play_sfx("guard_defeat")
 		queue_redraw()
 
 func capture_rewind_state() -> Dictionary:
@@ -101,6 +106,8 @@ func _update_animation() -> void:
 	if not anim_sprite or not anim_sprite.sprite_frames:
 		return
 
+	anim_sprite.scale = sprite_scale
+	anim_sprite.offset = sprite_offset
 	anim_sprite.flip_h = (direction < 0.0)
 
 	if disabled:

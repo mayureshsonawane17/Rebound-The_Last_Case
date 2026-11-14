@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=25 format=3]
+[gd_resource type="SpriteFrames" load_steps=28 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/boss/idle/00.png" id="Ext_1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/boss/idle/01.png" id="Ext_2"]
@@ -23,7 +23,10 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/boss/defeat/05.png" id="Ext_21"]
 [ext_resource type="Texture2D" path="res://assets/sprites/boss/defeat/06.png" id="Ext_22"]
 [ext_resource type="Texture2D" path="res://assets/sprites/boss/defeat/07.png" id="Ext_23"]
-[ext_resource type="Texture2D" path="res://assets/sprites/boss/portrait/00.png" id="Ext_24"]
+[ext_resource type="Texture2D" path="res://assets/sprites/boss/defeat/08.png" id="Ext_24"]
+[ext_resource type="Texture2D" path="res://assets/sprites/boss/defeat/09.png" id="Ext_25"]
+[ext_resource type="Texture2D" path="res://assets/sprites/boss/defeat/10.png" id="Ext_26"]
+[ext_resource type="Texture2D" path="res://assets/sprites/boss/portrait/00.png" id="Ext_27"]
 
 [resource]
 animations = [
@@ -81,7 +84,7 @@ animations = [
 "texture": ExtResource("Ext_11")
 }
 ],
-"loop": false,
+"loop": true,
 "name": &"attack",
 "speed": 12.0
 },
@@ -141,6 +144,18 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_23")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_24")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_25")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_26")
 }
 ],
 "loop": false,
@@ -151,7 +166,7 @@ animations = [
 "frames": [
 {
 "duration": 1.0,
-"texture": ExtResource("Ext_24")
+"texture": ExtResource("Ext_27")
 }
 ],
 "loop": false,

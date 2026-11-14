@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=134 format=3]
+[gd_resource type="SpriteFrames" load_steps=136 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/00.png" id="Ext_1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ball/idle/01.png" id="Ext_2"]
@@ -64,75 +64,77 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/12.png" id="Ext_62"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/13.png" id="Ext_63"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/14.png" id="Ext_64"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/00.png" id="Ext_65"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/01.png" id="Ext_66"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/02.png" id="Ext_67"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/03.png" id="Ext_68"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/04.png" id="Ext_69"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/05.png" id="Ext_70"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/06.png" id="Ext_71"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/07.png" id="Ext_72"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/08.png" id="Ext_73"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/09.png" id="Ext_74"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/10.png" id="Ext_75"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/11.png" id="Ext_76"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/12.png" id="Ext_77"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/13.png" id="Ext_78"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/14.png" id="Ext_79"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/00.png" id="Ext_80"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/01.png" id="Ext_81"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/02.png" id="Ext_82"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/03.png" id="Ext_83"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/04.png" id="Ext_84"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/05.png" id="Ext_85"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/06.png" id="Ext_86"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/07.png" id="Ext_87"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/08.png" id="Ext_88"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/09.png" id="Ext_89"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/10.png" id="Ext_90"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/11.png" id="Ext_91"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/12.png" id="Ext_92"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/13.png" id="Ext_93"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/14.png" id="Ext_94"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/00.png" id="Ext_95"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/01.png" id="Ext_96"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/02.png" id="Ext_97"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/03.png" id="Ext_98"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/04.png" id="Ext_99"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/05.png" id="Ext_100"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/06.png" id="Ext_101"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/07.png" id="Ext_102"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/08.png" id="Ext_103"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/09.png" id="Ext_104"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/10.png" id="Ext_105"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/11.png" id="Ext_106"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/00.png" id="Ext_107"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/01.png" id="Ext_108"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/02.png" id="Ext_109"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/03.png" id="Ext_110"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/04.png" id="Ext_111"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/05.png" id="Ext_112"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/06.png" id="Ext_113"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/07.png" id="Ext_114"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/08.png" id="Ext_115"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/09.png" id="Ext_116"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/10.png" id="Ext_117"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/11.png" id="Ext_118"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/12.png" id="Ext_119"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/00.png" id="Ext_120"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/01.png" id="Ext_121"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/02.png" id="Ext_122"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/03.png" id="Ext_123"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/04.png" id="Ext_124"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/05.png" id="Ext_125"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/06.png" id="Ext_126"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/07.png" id="Ext_127"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/08.png" id="Ext_128"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/09.png" id="Ext_129"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/10.png" id="Ext_130"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/11.png" id="Ext_131"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/12.png" id="Ext_132"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/13.png" id="Ext_133"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/15.png" id="Ext_65"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/fall/16.png" id="Ext_66"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/00.png" id="Ext_67"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/01.png" id="Ext_68"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/02.png" id="Ext_69"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/03.png" id="Ext_70"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/04.png" id="Ext_71"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/05.png" id="Ext_72"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/06.png" id="Ext_73"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/07.png" id="Ext_74"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/08.png" id="Ext_75"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/09.png" id="Ext_76"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/10.png" id="Ext_77"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/11.png" id="Ext_78"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/12.png" id="Ext_79"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/13.png" id="Ext_80"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/land/14.png" id="Ext_81"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/00.png" id="Ext_82"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/01.png" id="Ext_83"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/02.png" id="Ext_84"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/03.png" id="Ext_85"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/04.png" id="Ext_86"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/05.png" id="Ext_87"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/06.png" id="Ext_88"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/07.png" id="Ext_89"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/08.png" id="Ext_90"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/09.png" id="Ext_91"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/10.png" id="Ext_92"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/11.png" id="Ext_93"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/12.png" id="Ext_94"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/13.png" id="Ext_95"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/14.png" id="Ext_96"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/15.png" id="Ext_97"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/bounce/16.png" id="Ext_98"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/00.png" id="Ext_99"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/01.png" id="Ext_100"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/02.png" id="Ext_101"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/03.png" id="Ext_102"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/04.png" id="Ext_103"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/05.png" id="Ext_104"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/06.png" id="Ext_105"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/07.png" id="Ext_106"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/08.png" id="Ext_107"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/09.png" id="Ext_108"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/10.png" id="Ext_109"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/wall_jump/11.png" id="Ext_110"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/00.png" id="Ext_111"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/01.png" id="Ext_112"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/02.png" id="Ext_113"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/03.png" id="Ext_114"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/04.png" id="Ext_115"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/05.png" id="Ext_116"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/06.png" id="Ext_117"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/07.png" id="Ext_118"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/08.png" id="Ext_119"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/09.png" id="Ext_120"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/10.png" id="Ext_121"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/11.png" id="Ext_122"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/12.png" id="Ext_123"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/hit/13.png" id="Ext_124"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/00.png" id="Ext_125"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/01.png" id="Ext_126"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/02.png" id="Ext_127"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/03.png" id="Ext_128"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/04.png" id="Ext_129"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/05.png" id="Ext_130"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/06.png" id="Ext_131"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/07.png" id="Ext_132"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/08.png" id="Ext_133"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/09.png" id="Ext_134"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ball/death/10.png" id="Ext_135"]
 
 [resource]
 animations = [
@@ -414,6 +416,14 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_64")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_65")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_66")
 }
 ],
 "loop": false,
@@ -422,14 +432,6 @@ animations = [
 },
 {
 "frames": [
-{
-"duration": 1.0,
-"texture": ExtResource("Ext_65")
-},
-{
-"duration": 1.0,
-"texture": ExtResource("Ext_66")
-},
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_67")
@@ -481,6 +483,14 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_79")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_80")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_81")
 }
 ],
 "loop": false,
@@ -489,14 +499,6 @@ animations = [
 },
 {
 "frames": [
-{
-"duration": 1.0,
-"texture": ExtResource("Ext_80")
-},
-{
-"duration": 1.0,
-"texture": ExtResource("Ext_81")
-},
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_82")
@@ -548,14 +550,7 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_94")
-}
-],
-"loop": true,
-"name": &"bounce",
-"speed": 12.0
 },
-{
-"frames": [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_95")
@@ -571,7 +566,14 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_98")
+}
+],
+"loop": true,
+"name": &"bounce",
+"speed": 12.0
 },
+{
+"frames": [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_99")
@@ -603,14 +605,7 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_106")
-}
-],
-"loop": false,
-"name": &"wall_jump",
-"speed": 12.0
 },
-{
-"frames": [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_107")
@@ -626,7 +621,14 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_110")
+}
+],
+"loop": false,
+"name": &"wall_jump",
+"speed": 12.0
 },
+{
+"frames": [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_111")
@@ -662,14 +664,7 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_119")
-}
-],
-"loop": false,
-"name": &"hit",
-"speed": 12.0
 },
-{
-"frames": [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_120")
@@ -689,7 +684,14 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_124")
+}
+],
+"loop": false,
+"name": &"hit",
+"speed": 12.0
 },
+{
+"frames": [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_125")
@@ -725,6 +727,14 @@ animations = [
 {
 "duration": 1.0,
 "texture": ExtResource("Ext_133")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_134")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("Ext_135")
 }
 ],
 "loop": false,
